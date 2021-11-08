@@ -2,3 +2,20 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+input:valid {
+  color: green;
+}
+
+input:invalid {
+  color: red;
+}
+
+input:required,
+textarea:required {
+  border: 1px solid orange;
+}
+
+input:focus {
+  color: black;
+}
