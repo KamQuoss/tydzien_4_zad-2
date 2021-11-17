@@ -1,12 +1,15 @@
 :root {
   --error-color: #e74c3c;
-  --success-color: #27ae60;
-  --warning-color: #f39c12;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h1,
+h2 {
+  margin: 0.5rem 0;
 }
 
 .App {
@@ -72,18 +75,21 @@ form {
   outline: none;
 }
 
-.form-field.error input .form-field.error textarea {
+.form-field.error input,
+.form-field.error textarea {
   border-color: var(--error-color);
-}
-
-.form-field.success input {
-  border-color: var(--success-color);
 }
 
 small {
   color: var(--error-color);
+  visibility: hidden;
 }
 
+.form-field.error small,
+.form-radio.error small,
+.form-checkbox.error small {
+  visibility: visible;
+}
 /* button */
 button {
   width: 100%;
