@@ -36,7 +36,9 @@ form {
   padding: 10px 20px;
 }
 
-.form-field {
+.form-field,
+.form-radio,
+.form-checkbox {
   margin-bottom: 5px;
 }
 
