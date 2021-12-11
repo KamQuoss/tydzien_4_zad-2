@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 export const Form = () => {
-  const [name, setName] = React.useState("");
-  const [email, setMail] = React.useState("");
-  const [bio, setBio] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [acceptance, setAcceptance] = React.useState(false);
+  const [name, setName] = useState("");
+  const [email, setMail] = useState("");
+  const [bio, setBio] = useState("");
+  const [gender, setGender] = useState("");
+  const [acceptance, setAcceptance] = useState(false);
 
-  const nameElement = React.useRef();
-  const emailElement = React.useRef();
-  const biolElement = React.useRef();
-  const genderElement = React.useRef();
-  const acceptanceElement = React.useRef();
+  const nameElement = useRef();
+  const emailElement = useRef();
+  const biolElement = useRef();
+  const genderElement = useRef();
+  const acceptanceElement = useRef();
 
   const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+  const addError = (element) => {
+    element.current.classList.add("error");
+  };
+  const removeErrors = (elements) => {
+    elements.map((element) => element.current.classList.remove("error"));
+  };
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleMailChange = (e) => setMail(e.target.value);
@@ -25,40 +32,38 @@ export const Form = () => {
     e.preventDefault();
     let formIsValid = true;
 
+    removeErrors([
+      nameElement,
+      emailElement,
+      biolElement,
+      genderElement,
+      acceptanceElement
+    ]);
+
     // check if name is ok?
     if (name.length < 3) {
-      nameElement.current.classList.add("error");
+      addError(nameElement);
       formIsValid = false;
-    } else {
-      nameElement.current.classList.remove("error");
     }
     // check if email is ok?
-    if (email.length == 0 || !email.match(re)) {
-      emailElement.current.classList.add("error");
+    if (email.length === 0 || !email.match(re)) {
+      addError(emailElement);
       formIsValid = false;
-    } else {
-      emailElement.current.classList.remove("error");
     }
     // check if bio is ok?
     if (bio.length < 5) {
-      biolElement.current.classList.add("error");
+      addError(biolElement);
       formIsValid = false;
-    } else {
-      biolElement.current.classList.remove("error");
     }
     // check if gender is ok?
     if (!gender) {
-      genderElement.current.classList.add("error");
+      addError(genderElement);
       formIsValid = false;
-    } else {
-      genderElement.current.classList.remove("error");
     }
     // check if acceptance is ok?
     if (!acceptance) {
-      acceptanceElement.current.classList.add("error");
+      addError(acceptanceElement);
       formIsValid = false;
-    } else {
-      acceptanceElement.current.classList.remove("error");
     }
 
     if (formIsValid) {
